@@ -2,9 +2,9 @@ name: Lint on Push and Pull Request
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ] # Remplacer 'main' par votre branche principale
+    branches: [ master ] # Remplacer 'main' par votre branche principale
 
 jobs:
   lint:
