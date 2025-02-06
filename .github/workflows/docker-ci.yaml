@@ -1,0 +1,21 @@
+name: Build and Push Docker Image 
+ 
+on: 
+  push: 
+    branches: [ "main" ] 
+ 
+jobs: 
+  build: 
+    runs-on: ubuntu-latest 
+ 
+    steps: 
+      - uses: actions/checkout@v3 
+ 
+      - name: Build the Docker image 
+        run: docker build -f Dockerfile.basic -t ghcr.io/mathieu-junia/frontend:${{ github.sha }} . 
+ 
+      - name: Log in to the registry 
+        run: docker login ghcr.io -u ${{ secrets.GITHUB_TOKEN }} -p ${{ secrets.GITHUB_TOKEN }} 
+ 
+      - name: Push the Docker image 
+        run: docker push ghcr.io/mathieu-junia/frontend:${{ github.sha }}
