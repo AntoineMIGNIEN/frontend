@@ -1,5 +1,6 @@
 import httpx
 import streamlit as st
+
 from rest.service import Chat, client
 
 # Set page title
