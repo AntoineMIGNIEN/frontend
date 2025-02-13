@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build the Docker image
-        run: docker build -f Dockerfile.basic -t ghcr.io/antoinemignien/frontend:${{ github.sha }} .
+        run: docker build -f Dockerfile.advanced -t ghcr.io/antoinemignien/frontend:${{ github.sha }} .
 
       - name: Install and run Container Structure Tests
         run: |

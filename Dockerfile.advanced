@@ -4,6 +4,13 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 WORKDIR /app
 
+ARG USERNAME=nonroot
+ARG USER_UID=65532
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+&& useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+
 # Install dependencies
 RUN --mount=type=cache,target=/root/.cache/uv \
   --mount=type=bind,source=uv.lock,target=uv.lock \
@@ -22,6 +29,7 @@ COPY --from=builder --chown=app:app /app/.venv /app/.venv
 
 # Set environment variables
 ENV PATH="/app/.venv/bin:$PATH" PYTHONPATH="app/.venv/lib/python3.12/site-packages"
+
 
 EXPOSE 8501
 
